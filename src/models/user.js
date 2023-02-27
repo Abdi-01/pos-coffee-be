@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     roleId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'user',
   });
   return User;
 };
