@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const { createToken } = require('../helper/jwt');
 const fs = require('fs');
 const {v4 : uuidv4} = require('uuid')
+
 let salt = bcrypt.genSaltSync(10);
 
 module.exports = {
@@ -34,9 +35,9 @@ module.exports = {
                     })
                 }
             } else {
-                res.status(400).send({
+                res.status(404).send({
                     success: false,
-                    message: "Login fail username or password worng"
+                    message: "Account not found"
                 })
             }
 

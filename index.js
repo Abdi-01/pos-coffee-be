@@ -19,8 +19,10 @@ app.get('/', (req, res) => {
 })
 
 // Routing Config
-const authRouter = require('./src/routers/authRouter');
+const productRouter = require("./src/routers/productRouter");
+app.use("/products", productRouter);
 
+const authRouter = require('./src/routers/authRouter');
 app.use('/auth', authRouter);
 
 // Error Handling
