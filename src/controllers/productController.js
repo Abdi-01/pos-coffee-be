@@ -6,7 +6,7 @@ module.exports = {
   //1. RETRIEVE PRODUCTS FROM DATABASE WITH PAGINATION
   list: async (req, res, next) => {
     try {
-      let { page, size, name } = req.query;
+      let  { page, size, name, sortby, order } = req.query;  
       if (!page) {
         page = 0;
       }
@@ -18,6 +18,7 @@ module.exports = {
         offset: parseInt(page * size),
         limit: parseInt(size),
         where: { name: { [sequelize.Op.like]: `%${name}%` } },
+        order: [[ sortby , order ]]  
       });
 
       res.status(200).send({
