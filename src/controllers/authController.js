@@ -108,9 +108,9 @@ module.exports = {
                     data: regis
                 })
             } else {
-                return res.status(200).send({
+                return res.status(400).send({
                     success: false,
-                    message: "failed to register"
+                    message: "user already exist"
                 })
             }
 
