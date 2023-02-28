@@ -1,9 +1,9 @@
 const route = require("express").Router();
-const { productController } = require("../controllers");    // penyederhanaan buat manggil controller
+const { productController } = require("../controllers");  
 const jwt = require('jsonwebtoken');
 const { readToken } = require('../helper/jwt');
 
 
-route.post("/", readToken, productController.list); 
+route.post("/list", readToken, productController.list); 
 
 module.exports = route;

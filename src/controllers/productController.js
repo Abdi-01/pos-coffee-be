@@ -1,21 +1,33 @@
 const sequelize = require("sequelize");
 const model = require("../models");
 
-
 module.exports = {
-    //1.SHOW ALL PRODUCT
-    list: async(req,res,next)=>{
-        try {
-            console.log("ini adalah decrypt : ", req.decrypt);
-            let get = await model.product.findAll({
-                limit: 9
-            });
-            console.log("ini hasil get :", get);
-            res.status(200).send(get);
-        } catch (error) {
-            console.log(error);
-            next(error);
-        }
-    }
 
+  //1. RETRIEVE PRODUCTS FROM DATABASE WITH PAGINATION
+  list: async (req, res, next) => {
+    try {
+      let { page, size, name } = req.query;
+      if (!page) {
+        page = 0;
+      }
+      if (!size) {
+        size = 6;
+      }
+
+      let get = await model.product.findAndCountAll({
+        offset: parseInt(page * size),
+        limit: parseInt(size),
+        where: { name: { [sequelize.Op.like]: `%${name}%` } },
+      });
+
+      res.status(200).send({
+        data: get.rows,
+        totalPages: Math.ceil(get.count / size),
+        datanum: get.count,
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  },
 };
