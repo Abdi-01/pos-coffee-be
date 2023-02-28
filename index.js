@@ -15,7 +15,7 @@ app.use("/", express.static(__dirname + "/public"));
 // DB Check Connection
 
 app.get('/', (req, res) => {
-  res.status(200).send('<h1>SOCIO API v1</h1>');
+  res.status(200).send('<h1>Coffe Shop API v1</h1>');
 })
 
 // Routing Config
