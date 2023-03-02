@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   status.associate = (models) => {
     status.hasMany(models.product, { foreignKey: "statusId" });
+    status.hasMany(models.product, { foreignKey: "statusId" });
   };
   return status;
 };

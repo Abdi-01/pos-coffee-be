@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   category.init(
     {
       category: DataTypes.STRING,
+      statusId: DataTypes.INTEGER,
     },
     {
       sequelize,
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
   category.associate = (models) => {
     // one category can belong to many products
     category.hasMany(models.product, { foreignKey: "categoryId" });
+    category.belongsTo(models.status, { foreignKey: "statusId" });
   };
   return category;
 };
