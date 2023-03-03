@@ -13,6 +13,12 @@ module.exports = {
       if (!size) {
         size = 6;
       }
+      if (!sortby) {
+        sortby = "name";
+      }
+      if (!order) {
+        order = "ASC";
+      }
 
       if (!status) {
         let get = await model.product.findAndCountAll({
