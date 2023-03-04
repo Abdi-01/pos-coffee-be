@@ -1,9 +1,9 @@
 const { join } = require("path");
-require('dotenv').config({ path: join(__dirname, '.env') });
-const express = require('express');
+require("dotenv").config({ path: join(__dirname, ".env") });
+const express = require("express");
 const app = express();
-const cors = require('cors');
-const bearerToken = require('express-bearer-token')
+const cors = require("cors");
+const bearerToken = require("express-bearer-token");
 const PORT = process.env.PORT || 2000;
 
 app.use(cors());
@@ -14,16 +14,19 @@ app.use("/", express.static(__dirname + "/public"));
 
 // DB Check Connection
 
-app.get('/', (req, res) => {
-  res.status(200).send('<h1>Coffe Shop API v1</h1>');
-})
+app.get("/", (req, res) => {
+  res.status(200).send("<h1>Coffe Shop API v1</h1>");
+});
 
 // Routing Config
 const productRouter = require("./src/routers/productRouter");
 app.use("/products", productRouter);
 
-const authRouter = require('./src/routers/authRouter');
-app.use('/auth', authRouter);
+const authRouter = require("./src/routers/authRouter");
+app.use("/auth", authRouter);
+
+const transaction = require("./src/routers/transactionRouter");
+app.use("/transaction", transaction);
 
 // Error Handling
 app.use((err, req, res, next) => {
@@ -32,7 +35,7 @@ app.use((err, req, res, next) => {
   const status = err.status || 500;
   // send back an easily understandable error message to the caller
   res.status(status).send(err);
-})
+});
 
 app.listen(PORT, (err) => {
   if (err) {
